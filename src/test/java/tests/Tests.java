@@ -1,7 +1,5 @@
 package tests;
 
-
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
@@ -13,12 +11,12 @@ public class Tests {
         String userLogin = "standard_user";
         String password = "secret_sauce";
 
-        @BeforeAll
+@BeforeAll
         public static void setUp() {
             open("https://www.saucedemo.com/");
         }
 
-        @Test
+ @Test
         public void LoginTest() {
             LoginPage.waitForPageIsLoaded();
             LoginPage.enterUsername(userLogin);
@@ -32,4 +30,4 @@ public class Tests {
         ProductPage.checkProductCard();
         ProductPage.addToCart();
     }
-    }
+}
