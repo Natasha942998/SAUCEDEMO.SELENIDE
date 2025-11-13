@@ -1,6 +1,5 @@
 package pages;
 
-
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
@@ -37,4 +36,3 @@ public class ProductPage {
         cardBadge.shouldBe(visible).shouldHave(text("1"));
     }
 }
-
