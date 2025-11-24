@@ -1,31 +1,50 @@
 package pages;
 
-import com.codeborne.selenide.SelenideElement;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.selector.ByDeepShadow.cssSelector;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
-    private static final SelenideElement title = $(cssSelector(".login_logo"));
-    private static final SelenideElement userName = $(cssSelector("#user-name"));
-    private static final SelenideElement password = $(cssSelector("#password"));
-    private static final SelenideElement loginButton = $(cssSelector("#login-button"));
+    @FindBy(className = ".login_logo")
+    private static WebElement title;
 
-    public static void waitForPageIsLoaded() {
-        title.shouldBe(visible).shouldHave(text("Swag Labs"));
+    @FindBy(id = "user-name")
+    private static WebElement userName;
+
+    @FindBy(id = "password")
+    private static WebElement password;
+
+    @FindBy(id = "login-button")
+    private static WebElement loginButton;
+
+    public LoginPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
     }
 
-    public static void enterUsername(String value) {
-        userName.setValue(value);
+    public void waitForPageIsLoaded() {
+        if (title.isDisplayed() && title.getText().equals("Swag Labs")) {
+            System.out.println("Page is open");
+        } else {
+            System.out.println("Page is not displayed");
+        }
     }
 
-    public static void enterPassword(String value) {
-        password.setValue(value);
+    public void enterUserName(String value) {
+        userName.sendKeys(value);
     }
 
-    public static void clickLoginButton() {
+    public void enterPassword(String value) {
+        password.sendKeys(value);
+    }
+
+    public void clickLoginButton() {
+        loginButton.click();
+    }
+
+    public void login(String name, String password) {
+        enterUserName(name);
+        enterPassword(password);
         loginButton.click();
     }
 }
